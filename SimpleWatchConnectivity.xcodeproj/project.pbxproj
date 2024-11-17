@@ -39,6 +39,17 @@
 		743133B12CEA3B1F00B36B5A /* SimpleWatchConnectivity Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SimpleWatchConnectivity Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		743133D32CEA401100B36B5A /* Exceptions for "Shared" folder in "SimpleWatchConnectivity Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				ConnectivityManager.swift,
+				Logger.swift,
+			);
+			target = 743133B02CEA3B1F00B36B5A /* SimpleWatchConnectivity Watch App */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		743133A32CEA3B1D00B36B5A /* SimpleWatchConnectivity */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -48,6 +59,14 @@
 		743133B52CEA3B1F00B36B5A /* SimpleWatchConnectivity Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "SimpleWatchConnectivity Watch App";
+			sourceTree = "<group>";
+		};
+		743133C82CEA3CE800B36B5A /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				743133D32CEA401100B36B5A /* Exceptions for "Shared" folder in "SimpleWatchConnectivity Watch App" target */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -76,6 +95,7 @@
 				743133A32CEA3B1D00B36B5A /* SimpleWatchConnectivity */,
 				743133B52CEA3B1F00B36B5A /* SimpleWatchConnectivity Watch App */,
 				743133A22CEA3B1D00B36B5A /* Products */,
+				743133C82CEA3CE800B36B5A /* Shared */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +127,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				743133A32CEA3B1D00B36B5A /* SimpleWatchConnectivity */,
+				743133C82CEA3CE800B36B5A /* Shared */,
 			);
 			name = SimpleWatchConnectivity;
 			packageProductDependencies = (
