@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
-  private let connectivityMetaInfoManager: ConnectivityMetaInfoManager
+  @ObservedObject
+  private var connectivityMetaInfoManager: ConnectivityMetaInfoManager
+
   private let connectivityManager: ConnectivityManager
 
   init() {
-    self.connectivityMetaInfoManager = ConnectivityMetaInfoManager()
+    let connectivityMetaInfoManager = ConnectivityMetaInfoManager()
     self.connectivityManager = ConnectivityManager(
       connectivityMetaInfoManager: connectivityMetaInfoManager
     )
+    self.connectivityMetaInfoManager = connectivityMetaInfoManager
   }
 
   var body: some View {
@@ -23,7 +26,7 @@ struct ContentView: View {
       Image(systemName: "globe")
         .imageScale(.large)
         .foregroundStyle(.tint)
-      Text("Hello, world!")
+      Text("# of open Connections: \(connectivityMetaInfoManager.openSendConnectionsCount)")
       Button("Send Message") {
         Task.detached {
           try await connectivityManager.sendExample()
