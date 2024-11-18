@@ -8,7 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
-  private let connectivityManager = ConnectivityManager()
+  private let connectivityMetaInfoManager: ConnectivityMetaInfoManager
+  private let connectivityManager: ConnectivityManager
+
+  init() {
+    self.connectivityMetaInfoManager = ConnectivityMetaInfoManager()
+    self.connectivityManager = ConnectivityManager(
+      connectivityMetaInfoManager: connectivityMetaInfoManager
+    )
+  }
 
   var body: some View {
     VStack {
@@ -24,8 +32,4 @@ struct ContentView: View {
     }
     .padding()
   }
-}
-
-#Preview {
-  ContentView()
 }

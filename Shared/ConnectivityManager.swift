@@ -15,11 +15,13 @@ actor ConnectivityManager: NSObject, WCSessionDelegate {
 
   private var session: WCSession = .default
 
-  @MainActor
-  lazy var connectivityMetaInfoManager = ConnectivityMetaInfoManager()
+  private let connectivityMetaInfoManager: ConnectivityMetaInfoManager
 
-  override init() {
+  init(connectivityMetaInfoManager: ConnectivityMetaInfoManager) {
     Logger.shared.debug("run on Thread \(Thread.current)")
+
+    self.connectivityMetaInfoManager = connectivityMetaInfoManager
+
     super.init()
 
     self.session.delegate = self
@@ -85,20 +87,26 @@ extension ConnectivityManager {
 
     return try await withCheckedThrowingContinuation({
       continuation in
-      Logger.shared.debug("withCheckedThrowingContinuation called on Thread \(Thread.current)")
+      Logger.shared.debug(
+        "withCheckedThrowingContinuation called on Thread \(Thread.current)"
+      )
       self.session.sendMessageData(
         data,
         replyHandler: { data in
-          Logger.shared.debug("replyHandler called on Thread \(Thread.current)")
+          Logger.shared.debug(
+            "replyHandler called on Thread \(Thread.current)")
           Task {
-            await self.connectivityMetaInfoManager.decreaseOpenSendConnectionsCount()
+            await self.connectivityMetaInfoManager
+              .decreaseOpenSendConnectionsCount()
           }
           continuation.resume(returning: data)
         },
         errorHandler: { (error) in
-          Logger.shared.debug("errorHandler called on Thread \(Thread.current)")
+          Logger.shared.debug(
+            "errorHandler called on Thread \(Thread.current)")
           Task {
-            await self.connectivityMetaInfoManager.decreaseOpenSendConnectionsCount()
+            await self.connectivityMetaInfoManager
+              .decreaseOpenSendConnectionsCount()
           }
           continuation.resume(throwing: error)
         }
