@@ -6,3 +6,8 @@ The Issue was posted on [forums.swift.org](https://forums.swift.org/t/watchconne
 - [`main`](https://github.com/justmejulian/SimpleWatchConnectivity/tree/main) branch contains the broken example.
 - [`fix`](https://github.com/justmejulian/SimpleWatchConnectivity/tree/fix) branch contains the potential fix.
 
+## Info
+
+Tested on Simulator
+ - iphone 16 plus (18.1)
+ - apple watch 10 (46mm) (11.1)
