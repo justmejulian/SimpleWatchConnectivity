@@ -84,31 +84,33 @@ extension ConnectivityManager {
     await connectivityMetaInfoManager.increaseOpenSendConnectionsCount()
 
     return try await withCheckedThrowingContinuation({
-      continuation in
+      @Sendable continuation in
       Logger.shared.debug(
         "withCheckedThrowingContinuation called on Thread \(Thread.current)"
       )
-      self.session.sendMessageData(
-        data,
-        replyHandler: { data in
-          Logger.shared.debug(
-            "replyHandler called on Thread \(Thread.current)")
-          Task {
-            await self.connectivityMetaInfoManager
-              .decreaseOpenSendConnectionsCount()
+      Task {
+        await self.session.sendMessageData(
+          data,
+          replyHandler: { data in
+            Logger.shared.debug(
+              "replyHandler called on Thread \(Thread.current)")
+            Task {
+              await self.connectivityMetaInfoManager
+                .decreaseOpenSendConnectionsCount()
+            }
+            continuation.resume(returning: data)
+          },
+          errorHandler: { (error) in
+            Logger.shared.debug(
+              "errorHandler called on Thread \(Thread.current)")
+            Task {
+              await self.connectivityMetaInfoManager
+                .decreaseOpenSendConnectionsCount()
+            }
+            continuation.resume(throwing: error)
           }
-          continuation.resume(returning: data)
-        },
-        errorHandler: { (error) in
-          Logger.shared.debug(
-            "errorHandler called on Thread \(Thread.current)")
-          Task {
-            await self.connectivityMetaInfoManager
-              .decreaseOpenSendConnectionsCount()
-          }
-          continuation.resume(throwing: error)
-        }
-      )
+        )
+      }
     })
   }
 }
