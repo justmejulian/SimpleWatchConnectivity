@@ -1,8 +1,5 @@
 //
 //  ContentView.swift
-//  SimpleWatchConnectivity
-//
-//  Created by Julian Visser on 17.11.2024.
 //
 
 import SwiftUI

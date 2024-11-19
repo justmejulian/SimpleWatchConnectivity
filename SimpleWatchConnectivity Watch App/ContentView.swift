@@ -2,8 +2,6 @@
 //  ContentView.swift
 //  SimpleWatchConnectivity Watch App
 //
-//  Created by Julian Visser on 17.11.2024.
-//
 
 import SwiftUI
 

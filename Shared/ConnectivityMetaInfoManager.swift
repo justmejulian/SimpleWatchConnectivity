@@ -1,8 +1,6 @@
 //
 //  OpenConnectionManager.swift
-//  tricorder
 //
-//  Created by Julian Visser on 15.11.2024.
 //
 
 import Foundation
