@@ -84,14 +84,14 @@ extension ConnectivityManager {
     await connectivityMetaInfoManager.increaseOpenSendConnectionsCount()
 
     return try await withCheckedThrowingContinuation({
-      @Sendable continuation in
+      continuation in
       Logger.shared.debug(
         "withCheckedThrowingContinuation called on Thread \(Thread.current)"
       )
       Task {
-        await self.session.sendMessageData(
+        self.session.sendMessageData(
           data,
-          replyHandler: { data in
+          replyHandler: { @Sendable data in
             Logger.shared.debug(
               "replyHandler called on Thread \(Thread.current)")
             Task {
@@ -100,7 +100,7 @@ extension ConnectivityManager {
             }
             continuation.resume(returning: data)
           },
-          errorHandler: { (error) in
+          errorHandler: { @Sendable (error) in
             Logger.shared.debug(
               "errorHandler called on Thread \(Thread.current)")
             Task {
